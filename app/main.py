@@ -13,13 +13,8 @@ def move_file(command: str) -> None:
         dest = os.path.join(dest, os.path.basename(src))
 
     dest_dir = os.path.dirname(dest)
-
     if dest_dir:
-        current = ""
-        for folder in dest_dir.split(os.sep):
-            current = folder if not current else os.path.join(current, folder)
-            if not os.path.exists(current):
-                os.mkdir(current)
+        os.makedirs(dest_dir, exist_ok=True)
 
     with open(src, "r") as f:
         content = f.read()
